@@ -18,6 +18,7 @@ namespace HotelReservationSystem
 
             Console.WriteLine("------Names of Hotels added------");
 
+            //Finding cheapest hotel
             try
             {
                 Console.WriteLine("Enter dates in dd-mm-yyyy format");

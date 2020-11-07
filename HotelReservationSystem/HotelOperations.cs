@@ -27,7 +27,11 @@ namespace HotelReservationSystem
             hotelList.Add(hotel);
         }
 
-
+        /// <summary>
+        /// Finds the cheapest hotel.
+        /// </summary>
+        /// <param name="dates">The dates.</param>
+        /// <returns></returns>
         public Hotel FindCheapestHotel(string[] dates)
         {
             DateTime[] validatedDates = dateValidation.ValidateDates(dates);
