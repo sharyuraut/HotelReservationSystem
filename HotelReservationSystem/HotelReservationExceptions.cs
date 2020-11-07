@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace HotelReservationSystem
 {
     [Serializable]
-    internal class HotelReservationExceptions : Exception
+    public class HotelReservationExceptions : Exception
     {
         public enum ExceptionType
         {
