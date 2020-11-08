@@ -41,7 +41,7 @@ namespace HotelReservationSystem
                 Console.WriteLine("Enter dates in dd-mm-yyyy format");
                 string[] dates = Console.ReadLine().Split(" ");
 
-                Console.WriteLine("Choose One:\n 1.Find cheapest hotel\t 2. Find cheapest and best rated hotel");
+                Console.WriteLine("Choose One:\n 1.Find cheapest hotel\t 2. Find cheapest and best rated hotel \t 3.Best rated hotel");
                 while (flag)
                 {
                     int choice = Convert.ToInt32( Console.ReadLine());               
@@ -61,6 +61,13 @@ namespace HotelReservationSystem
                             hotelOperations.DisplayHotels(cheapestBestRatedHotels);
                             break;
 
+                        case 3:
+                            flag = false;
+                            Hotel[] bestRatedHotel = hotelOperations.FindBestRatedHotel(dates).ToArray();
+                            Console.WriteLine("Best rated hotel is: ");
+                            hotelOperations.DisplayHotels(bestRatedHotel);
+                            break;
+
                         default:
                             flag = true;
                             Console.WriteLine("Enter Valid Choice.");
@@ -72,6 +79,16 @@ namespace HotelReservationSystem
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        public List<Hotel> FindBestRatedHotel(string[] dates)
+        {
+            DateTime[] validatedDates = dateValidation.ValidateDates(dates);
+            SetWeekendsAndWeekdays(validatedDates);
+
+            hotelList.Sort((e1, e2) => e1.ratings.CompareTo(e2.ratings));
+            int highestRating = hotelList.Last().ratings;
+            return hotelList.FindAll(e => e.ratings == highestRating);
         }
 
         /// <summary>
@@ -153,9 +170,10 @@ namespace HotelReservationSystem
         {
             for (int i = 1; i <= hotels.Length; i++)
             {
-                Console.WriteLine(i + ". " + hotels[i - 1].Hotelname);
+                Console.WriteLine(hotels[i - 1].Hotelname);
             }
             Console.WriteLine("Rate :" + CalculateTotalRate(hotels[0]));
+            Console.WriteLine("Rating: " + hotels[0].ratings);
         }
     }
 }
