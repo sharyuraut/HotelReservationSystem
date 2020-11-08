@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HotelReservationSystem;
+using System.Collections.Generic;
 
 namespace HotelReservationSystemTest
 {
@@ -30,11 +31,12 @@ namespace HotelReservationSystemTest
             hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
             hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
             hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
-            string[] dates = "01-01-2021 10-01-2021".Split(" ");
+            string[] dates = "13Nov2020 14Nov2020".Split(" ");    //Friday,Saturday
 
-            Hotel cheapestHotel = hotelOperations.FindCheapestHotel(dates);
+            Hotel[] cheapestHotel = hotelOperations.FindCheapestHotel(dates).ToArray();
 
-            Assert.AreEqual("HotelA", cheapestHotel.Hotelname);
+            Assert.AreEqual("HotelA", cheapestHotel[0].Hotelname);
+            Assert.AreEqual(1, cheapestHotel.Length);
         }
 
 
@@ -72,5 +74,24 @@ namespace HotelReservationSystemTest
 
             Assert.AreEqual(HotelReservationExceptions.ExceptionType.NULL_DATES, exception.type);
         }
+
+        //UC 4
+        [TestMethod]
+        [DataRow("11Nov2018 12Nov2018")]
+        [DataRow("13Nov2020 11Nov2020")]
+        public void Given_InvalidDate_Should_Return_HotelReservationException(string date)
+        {
+            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
+            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
+            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
+            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
+            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
+            string[] dates = date.Split(" ");
+
+            var exception = Assert.ThrowsException<HotelReservationExceptions>(() => hotelOperations.FindCheapestHotel(dates));
+
+            Assert.AreEqual(HotelReservationExceptions.ExceptionType.INVALID_DATE, exception.type);
+        }
+
     }
 }

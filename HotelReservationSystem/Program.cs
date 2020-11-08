@@ -13,12 +13,12 @@ namespace HotelReservationSystem
             hotelOperations.AddHotel(new Hotel("HotelA", 100,150));
             hotelOperations.AddHotel(new Hotel("HotelB", 200,600));
             hotelOperations.AddHotel(new Hotel("HotelC", 300,1000));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150,180));
+            hotelOperations.AddHotel(new Hotel("HotelD", 150,200));
             hotelOperations.AddHotel(new Hotel("HotelE", 500,800));
 
             Console.WriteLine("------Names of Hotels added------");
 
-            //Finding cheapest hotel
+           /* //Finding cheapest hotel
             try
             {
                 Console.WriteLine("Enter dates in dd-mm-yyyy format");
@@ -31,7 +31,9 @@ namespace HotelReservationSystem
             catch (HotelReservationExceptions e)
             {
                 Console.WriteLine(e.Message);
-            }
+            }*/
+
+            HotelOperations.UserInput(hotelOperations);
         }
     }
 }
