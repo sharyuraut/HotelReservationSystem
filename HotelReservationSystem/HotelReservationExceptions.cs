@@ -14,6 +14,7 @@ namespace HotelReservationSystem
             INVALID_DATE,
             NULL_DATES,
             INVALID_DATE_FORMAT,
+            INVALID_CUSTOMER_TYPE,
         }
         public ExceptionType type;
 

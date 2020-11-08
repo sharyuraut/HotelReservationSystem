@@ -11,12 +11,14 @@ namespace HotelReservationSystem
         readonly DateValidation dateValidation = new DateValidation();
         int no_of_weekdays = 0;
         int no_of_weekends = 0;
+        public CustomerType ctype;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HotelOperations"/> class.
         /// </summary>
-        public HotelOperations()
+        public HotelOperations(CustomerType ctype)
         {
+            this.ctype = ctype;
             hotelList = new List<Hotel>();
         }
 
@@ -38,6 +40,18 @@ namespace HotelReservationSystem
             try
             {
                 bool flag = true;
+
+                Console.WriteLine("Enter customer type :1.REGULAR  2.REWARD");
+                Console.WriteLine("...................................");
+
+                int customerChoice = Convert.ToInt32(Console.ReadLine());
+
+                if (customerChoice == 1)
+                    hotelOperations.ctype = CustomerType.REGULAR;
+                else if (customerChoice == 2)
+                    hotelOperations.ctype = CustomerType.REWARD;
+                else
+                    throw new HotelReservationExceptions(HotelReservationExceptions.ExceptionType.INVALID_CUSTOMER_TYPE, "Invalid Customer Type");
                 Console.WriteLine("Enter dates in dd-mm-yyyy format");
                 string[] dates = Console.ReadLine().Split(" ");
 
@@ -159,7 +173,10 @@ namespace HotelReservationSystem
         /// <returns></returns>
         public int CalculateTotalRate(Hotel hotel)
         {
-            return (no_of_weekdays * hotel.ratesForRegularCustomerWeekday) + (no_of_weekends * hotel.ratesForRegularCustomerWeekend);
+            if (ctype == CustomerType.REGULAR)
+                return (no_of_weekdays * hotel.ratesForRegularCustomerWeekday) + (no_of_weekends * hotel.ratesForRegularCustomerWeekend);
+            else
+                return (no_of_weekdays * hotel.ratesForRegularCustomerWeekday) + (no_of_weekends * hotel.ratesForRegularCustomerWeekend);
         }
 
         /// <summary>

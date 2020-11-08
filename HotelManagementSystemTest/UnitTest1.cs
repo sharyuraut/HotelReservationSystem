@@ -7,7 +7,7 @@ namespace HotelReservationSystemTest
     [TestClass]
     public class UnitTest1
     {
-        readonly HotelOperations hotelOperations = new HotelOperations();
+        readonly HotelOperations hotelOperations = new HotelOperations(CustomerType.REGULAR);
 
         //UC 1
         [TestMethod]
@@ -38,8 +38,8 @@ namespace HotelReservationSystemTest
 
             Hotel[] cheapestHotel = hotelOperations.FindCheapestHotel(dates).ToArray();
 
-            Assert.AreEqual("Bridgewood", cheapestHotel[0].Hotelname);
-            Assert.AreEqual(1, cheapestHotel.Length);
+            Assert.AreEqual("Lakewood", cheapestHotel[0].Hotelname);
+            Assert.AreEqual(2, cheapestHotel.Length);
         }
 
 
@@ -110,12 +110,12 @@ namespace HotelReservationSystemTest
             hotelOperations.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
             hotelOperations.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
             hotelOperations.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
-            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
+            string[] dates = "13Nov2020 14Nov2020".Split(" ");    //Friday,Saturday
 
             Hotel[] bestRatedHotel = hotelOperations.FindBestRatedHotel(dates).ToArray();
 
             Assert.AreEqual(1, bestRatedHotel.Length);
-            Assert.AreEqual("Ridgewood", bestRatedHotel[0].Hotelname);
+            Assert.AreEqual("Bridgewood", bestRatedHotel[0].Hotelname);
         }
     }
 }

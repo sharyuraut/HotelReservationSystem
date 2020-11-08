@@ -9,7 +9,7 @@ namespace HotelReservationSystem
             Console.WriteLine("Welcome to Hotel Reservation Syatem!!");
             
             //Adding Hotels to the list
-            HotelOperations hotelOperations = new HotelOperations();
+            HotelOperations hotelOperations = new HotelOperations(CustomerType.REGULAR);
             hotelOperations.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
             hotelOperations.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
             hotelOperations.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
