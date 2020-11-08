@@ -159,7 +159,7 @@ namespace HotelReservationSystem
         /// <returns></returns>
         public int CalculateTotalRate(Hotel hotel)
         {
-            return (no_of_weekdays * hotel.ratesForCustomerWeekday) + (no_of_weekends * hotel.ratesForCustomerWeekend);
+            return (no_of_weekdays * hotel.ratesForRegularCustomerWeekday) + (no_of_weekends * hotel.ratesForRegularCustomerWeekend);
         }
 
         /// <summary>
