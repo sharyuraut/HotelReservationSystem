@@ -33,13 +33,36 @@ namespace HotelReservationSystem
         {
             try
             {
+                bool flag = true;
                 Console.WriteLine("Enter dates in dd-mm-yyyy format");
                 string[] dates = Console.ReadLine().Split(" ");
 
-                Hotel[] cheapestHotels = hotelOperations.FindCheapestHotel(dates).ToArray();
-                Console.WriteLine("Cheapest Hotel :");
+                Console.WriteLine("Choose One:\n 1.Find cheapest hotel\t 2. Find cheapest and best rated hotel");
+                while (flag)
+                {
+                    int choice = Convert.ToInt32( Console.ReadLine());               
+                    switch (choice)
+                    {
+                        case 1:
+                            flag = false;
+                            Hotel[] cheapestHotels = hotelOperations.FindCheapestHotel(dates).ToArray();
+                            Console.WriteLine("Cheapest Hotel :");
+                            hotelOperations.DisplayHotels(cheapestHotels);
+                            break;
 
-                hotelOperations.DisplayHotels(cheapestHotels);
+                        case 2:
+                            flag = false;
+                            Hotel[] cheapestBestRatedHotels = hotelOperations.FindCheapestBestRatedHotel(dates).ToArray();
+                            Console.WriteLine("Cheapest And Best Rated Hotel :");
+                            hotelOperations.DisplayHotels(cheapestBestRatedHotels);
+                            break;
+
+                        default:
+                            flag = true;
+                            Console.WriteLine("Enter Valid Choice.");
+                            break;
+                    }
+                }
             }
             catch (HotelReservationExceptions e)
             {
@@ -77,6 +100,14 @@ namespace HotelReservationSystem
                 }
             }
             return cheapestHotels;
+        }
+
+        public List<Hotel> FindCheapestBestRatedHotel(string[] dates)
+        {
+            List<Hotel> cheapestHotels = FindCheapestHotel(dates);
+            cheapestHotels.Sort((e1, e2) => e1.ratings.CompareTo(e2.ratings));
+            int highestRating = cheapestHotels.Last().ratings;
+            return cheapestHotels.FindAll(e => e.ratings == highestRating);
         }
 
         public void SetWeekendsAndWeekdays(DateTime[] dates)
