@@ -29,6 +29,10 @@ namespace HotelReservationSystem
             hotelList.Add(hotel);
         }
 
+        /// <summary>
+        /// Users the input.
+        /// </summary>
+        /// <param name="hotelOperations">The hotel operations.</param>
         public static void UserInput(HotelOperations hotelOperations)
         {
             try
@@ -102,6 +106,11 @@ namespace HotelReservationSystem
             return cheapestHotels;
         }
 
+        /// <summary>
+        /// Finds the cheapest best rated hotel.
+        /// </summary>
+        /// <param name="dates">The dates.</param>
+        /// <returns></returns>
         public List<Hotel> FindCheapestBestRatedHotel(string[] dates)
         {
             List<Hotel> cheapestHotels = FindCheapestHotel(dates);
@@ -110,6 +119,10 @@ namespace HotelReservationSystem
             return cheapestHotels.FindAll(e => e.ratings == highestRating);
         }
 
+        /// <summary>
+        /// Sets the weekends and weekdays.
+        /// </summary>
+        /// <param name="dates">The dates.</param>
         public void SetWeekendsAndWeekdays(DateTime[] dates)
         {
             no_of_weekends = 0; no_of_weekdays = 0;
@@ -122,11 +135,20 @@ namespace HotelReservationSystem
             }
         }
 
+        /// <summary>
+        /// Calculates the total rate.
+        /// </summary>
+        /// <param name="hotel">The hotel.</param>
+        /// <returns></returns>
         public int CalculateTotalRate(Hotel hotel)
         {
             return (no_of_weekdays * hotel.ratesForCustomerWeekday) + (no_of_weekends * hotel.ratesForCustomerWeekend);
         }
 
+        /// <summary>
+        /// Displays the hotels.
+        /// </summary>
+        /// <param name="hotels">The hotels.</param>
         private void DisplayHotels(Hotel[] hotels)
         {
             for (int i = 1; i <= hotels.Length; i++)

@@ -16,22 +16,7 @@ namespace HotelReservationSystem
 
             Console.WriteLine("------Names of Hotels added------");
 
-           /* //Finding cheapest hotel
-            try
-            {
-                Console.WriteLine("Enter dates in dd-mm-yyyy format");
-                string[] dates = Console.ReadLine().Split(" ");
-
-                Hotel cheapestHotel = hotelOperations.FindCheapestHotel(dates);
-                Console.WriteLine("The Cheapest Hotel during the given dates is :");
-                Console.WriteLine("Hotel Name: " + cheapestHotel.Hotelname + " ,Charges per day: " +cheapestHotel.ratesForCustomerWeekday);
-            }
-            catch (HotelReservationExceptions e)
-            {
-                Console.WriteLine(e.Message);
-            }*/
-
-            HotelOperations.UserInput(hotelOperations);
+           HotelOperations.UserInput(hotelOperations);
         }
     }
 }

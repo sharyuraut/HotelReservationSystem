@@ -6,6 +6,16 @@ namespace HotelReservationSystem
 {
     public class DateValidation
     {
+        /// <summary>
+        /// Validates the dates.
+        /// </summary>
+        /// <param name="Dates">The dates.</param>
+        /// <returns></returns>
+        /// <exception cref="HotelReservationExceptions">
+        /// Dates are null
+        /// or
+        /// Dates are invalid
+        /// </exception>
         public DateTime[] ValidateDates(string[] Dates)
         {
             if (Dates == null)
@@ -31,6 +41,12 @@ namespace HotelReservationSystem
             return datesValidated;
         }
 
+        /// <summary>
+        /// Converts to date.
+        /// </summary>
+        /// <param name="givenDates">The given dates.</param>
+        /// <returns></returns>
+        /// <exception cref="HotelReservationExceptions">Date Format is Invalid</exception>
         public DateTime ConvertToDate(string givenDates)
         {
             try

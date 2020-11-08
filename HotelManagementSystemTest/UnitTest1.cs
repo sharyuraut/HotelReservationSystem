@@ -56,7 +56,7 @@ namespace HotelReservationSystemTest
         }
 
 
-        //UC2.2 given null as date should throw exception
+        //UC2.3 given null as date should throw exception
         [TestMethod]
         public void Given_NullDates_Should_Return_HotelReservationException()
         {
