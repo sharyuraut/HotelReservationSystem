@@ -8,7 +8,7 @@ namespace HotelReservationSystem
     public class HotelOperations
     {
         public List<Hotel> hotelList;
-        DateValidation dateValidation = new DateValidation();
+        readonly DateValidation dateValidation = new DateValidation();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HotelOperations"/> class.
@@ -35,7 +35,7 @@ namespace HotelReservationSystem
         public Hotel FindCheapestHotel(string[] dates)
         {
             DateTime[] validatedDates = dateValidation.ValidateDates(dates);
-            hotelList.Sort((e1, e2) => e1.ratesForCustomer.CompareTo(e2.ratesForCustomer));
+            hotelList.Sort((e1, e2) => e1.ratesForCustomerWeekday.CompareTo(e2.ratesForCustomerWeekday));
             return hotelList.First();
         }
     }

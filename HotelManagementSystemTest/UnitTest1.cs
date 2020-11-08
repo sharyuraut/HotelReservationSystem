@@ -6,16 +6,17 @@ namespace HotelReservationSystemTest
     [TestClass]
     public class UnitTest1
     {
-        HotelOperations hotelOperations = new HotelOperations();
+        readonly HotelOperations hotelOperations = new HotelOperations();
 
         //UC 1
         [TestMethod]
         public void Given_NameAndRegularRates_Add_Hotel_To_List()
         {
             string hotelName = "HotelB";
-            int ratesForRegularCustomer = 200;
+            int ratesForCustomerWeekday = 200;
+            int ratesForCustomerWeekend = 600;
 
-            hotelOperations.AddHotel(new Hotel(hotelName, ratesForRegularCustomer));
+            hotelOperations.AddHotel(new Hotel(hotelName, ratesForCustomerWeekday, ratesForCustomerWeekend));
 
             Assert.AreEqual(1, hotelOperations.hotelList.Count);
         }
@@ -24,11 +25,11 @@ namespace HotelReservationSystemTest
         [TestMethod]
         public void Given_ValidDate_Should_Return_CheapestHotel()
         {
-            hotelOperations.AddHotel(new Hotel("HotelA", 100));
-            hotelOperations.AddHotel(new Hotel("HotelB", 200));
-            hotelOperations.AddHotel(new Hotel("HotelC", 300));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150));
-            hotelOperations.AddHotel(new Hotel("HotelE", 500));
+            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
+            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
+            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
+            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
+            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
             string[] dates = "01-01-2021 10-01-2021".Split(" ");
 
             Hotel cheapestHotel = hotelOperations.FindCheapestHotel(dates);
@@ -43,11 +44,11 @@ namespace HotelReservationSystemTest
         [DataRow("01-01-2020-10-01-2020")]
         public void Given_InvalidDates_Should_Return_HotelReservationException(string date)
         {
-            hotelOperations.AddHotel(new Hotel("HotelA", 100));
-            hotelOperations.AddHotel(new Hotel("HotelB", 200));
-            hotelOperations.AddHotel(new Hotel("HotelC", 300));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150));
-            hotelOperations.AddHotel(new Hotel("HotelE", 500));
+            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
+            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
+            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
+            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
+            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
             string[] dates = date.Split(" ");
 
             var exception = Assert.ThrowsException<HotelReservationExceptions>(() => hotelOperations.FindCheapestHotel(dates));
@@ -56,15 +57,15 @@ namespace HotelReservationSystemTest
         }
 
 
-        //UC2.3 given null as date should throw exception
+        //UC2.2 given null as date should throw exception
         [TestMethod]
         public void Given_NullDates_Should_Return_HotelReservationException()
         {
-            hotelOperations.AddHotel(new Hotel("HotelA", 100));
-            hotelOperations.AddHotel(new Hotel("HotelB", 200));
-            hotelOperations.AddHotel(new Hotel("HotelC", 300));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150));
-            hotelOperations.AddHotel(new Hotel("HotelE", 500));
+            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
+            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
+            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
+            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
+            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
             string[] dates = null;
 
             var exception = Assert.ThrowsException<HotelReservationExceptions>(() => hotelOperations.FindCheapestHotel(dates));

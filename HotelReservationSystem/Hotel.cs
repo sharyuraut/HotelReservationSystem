@@ -3,7 +3,8 @@
     public class Hotel
     {
         public string Hotelname;
-        public int ratesForCustomer;
+        public int ratesForCustomerWeekday;
+        public int ratesForCustomerWeekend;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Hotel"/> class.
@@ -11,18 +12,21 @@
         public Hotel()
         {
             Hotelname = "";
-            ratesForCustomer = 0;
+            ratesForCustomerWeekday = 0;
+            ratesForCustomerWeekend = 0;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Hotel"/> class.
         /// </summary>
         /// <param name="Hotelname">The hotelname.</param>
-        /// <param name="ratesForRegularCustomer">The rates for regular customer.</param>
-        public Hotel(string Hotelname, int ratesForRegularCustomer)
+        /// <param name="ratesForCustomerWeekday">The rates for customer weekday.</param>
+        /// <param name="ratesForCustomerWeekend">The rates for customer weekend.</param>
+        public Hotel(string Hotelname, int ratesForCustomerWeekday, int ratesForCustomerWeekend)
         {
             this.Hotelname = Hotelname;
-            this.ratesForCustomer = ratesForRegularCustomer;
+            this.ratesForCustomerWeekday = ratesForCustomerWeekday;
+            this.ratesForCustomerWeekday = ratesForCustomerWeekend;
         }
     }
 }

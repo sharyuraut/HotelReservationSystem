@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HotelReservationSystem
 {
-    class DateValidation
+    public class DateValidation
     {
         public DateTime[] ValidateDates(string[] Dates)
         {
