@@ -13,11 +13,12 @@ namespace HotelReservationSystemTest
         [TestMethod]
         public void Given_NameAndRegularRates_Add_Hotel_To_List()
         {
-            string hotelName = "HotelB";
-            int ratesForCustomerWeekday = 200;
-            int ratesForCustomerWeekend = 600;
+            string hotelName = "Bridgewood";
+            int ratesForCustomerWeekday = 150;
+            int ratesForCustomerWeekend = 50;
+            int ratings = 5;
 
-            hotelOperations.AddHotel(new Hotel(hotelName, ratesForCustomerWeekday, ratesForCustomerWeekend));
+            hotelOperations.AddHotel(new Hotel(hotelName, ratesForCustomerWeekday, ratesForCustomerWeekend, ratings));
 
             Assert.AreEqual(1, hotelOperations.hotelList.Count);
         }
@@ -26,16 +27,14 @@ namespace HotelReservationSystemTest
         [TestMethod]
         public void Given_ValidDate_Should_Return_CheapestHotel()
         {
-            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
-            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
-            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
-            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
+            hotelOperations.AddHotel(new Hotel("Lakewood", 110, 90, 3));
+            hotelOperations.AddHotel(new Hotel("Bridgewood", 150, 50, 4));
+            hotelOperations.AddHotel(new Hotel("Ridgewood", 220, 150, 5));
             string[] dates = "13Nov2020 14Nov2020".Split(" ");    //Friday,Saturday
 
             Hotel[] cheapestHotel = hotelOperations.FindCheapestHotel(dates).ToArray();
 
-            Assert.AreEqual("HotelA", cheapestHotel[0].Hotelname);
+            Assert.AreEqual("Bridgewood", cheapestHotel[0].Hotelname);
             Assert.AreEqual(1, cheapestHotel.Length);
         }
 
@@ -46,11 +45,9 @@ namespace HotelReservationSystemTest
         [DataRow("01-01-2020-10-01-2020")]
         public void Given_InvalidDates_Should_Return_HotelReservationException(string date)
         {
-            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
-            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
-            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
-            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
+            hotelOperations.AddHotel(new Hotel("Lakewood", 110, 90, 3));
+            hotelOperations.AddHotel(new Hotel("Bridgewood", 150, 50, 4));
+            hotelOperations.AddHotel(new Hotel("Ridgewood", 220, 150, 5));
             string[] dates = date.Split(" ");
 
             var exception = Assert.ThrowsException<HotelReservationExceptions>(() => hotelOperations.FindCheapestHotel(dates));
@@ -63,11 +60,9 @@ namespace HotelReservationSystemTest
         [TestMethod]
         public void Given_NullDates_Should_Return_HotelReservationException()
         {
-            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
-            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
-            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
-            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
+            hotelOperations.AddHotel(new Hotel("Lakewood", 110, 90, 3));
+            hotelOperations.AddHotel(new Hotel("Bridgewood", 150, 50, 4));
+            hotelOperations.AddHotel(new Hotel("Ridgewood", 220, 150, 5));
             string[] dates = null;
 
             var exception = Assert.ThrowsException<HotelReservationExceptions>(() => hotelOperations.FindCheapestHotel(dates));
@@ -81,11 +76,9 @@ namespace HotelReservationSystemTest
         [DataRow("13Nov2020 11Nov2020")]
         public void Given_InvalidDate_Should_Return_HotelReservationException(string date)
         {
-            hotelOperations.AddHotel(new Hotel("HotelA", 100, 150));
-            hotelOperations.AddHotel(new Hotel("HotelB", 200, 600));
-            hotelOperations.AddHotel(new Hotel("HotelC", 300, 1000));
-            hotelOperations.AddHotel(new Hotel("HotelD", 150, 180));
-            hotelOperations.AddHotel(new Hotel("HotelE", 500, 800));
+            hotelOperations.AddHotel(new Hotel("Lakewood", 110, 90, 3));
+            hotelOperations.AddHotel(new Hotel("Bridgewood", 150, 50, 4));
+            hotelOperations.AddHotel(new Hotel("Ridgewood", 220, 150, 5));
             string[] dates = date.Split(" ");
 
             var exception = Assert.ThrowsException<HotelReservationExceptions>(() => hotelOperations.FindCheapestHotel(dates));
